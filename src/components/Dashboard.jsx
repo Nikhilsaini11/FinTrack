@@ -83,7 +83,7 @@ const Dashboard = (props) => {
             </div>
 
             {/* Add Expense Section */}
-            <div id='addExpense' className="flex w-9/12 mx-auto flex-col items-center align-middle justify-center h-64 bg-[#1c1e22] rounded-lg shadow-lg p-4">
+            <div id='addExpense' className="flex w-full md:w-9/12 mx-auto flex-col items-center align-middle justify-center h-64 bg-[#1c1e22] rounded-lg shadow-lg p-4">
                 <div className="flex justify-between w-full mb-4">
                     {/* Balance on the Left */}
                     <h2 className="text-2xl text-[#e0e0e0]">Balance: ₹{balance.budget - balance.expense}</h2>
@@ -167,7 +167,7 @@ const Dashboard = (props) => {
                 <h2 className="text-3xl text-gradient bg-clip-text text-transparent bg-gradient-to-r from-[#ff014f] to-[#ff3366] mb-4">
                     Transactions
                 </h2>
-                <div className="flex flex-col w-9/12">
+                <div className="flex flex-col w-full md:w-9/12">
                     {transactions.length === 0 && <p className="text-[#e0e0e0] text-center mt-1 mb-1">No Transactions</p>}
                     {transactions.map(transaction => (
                         <div
