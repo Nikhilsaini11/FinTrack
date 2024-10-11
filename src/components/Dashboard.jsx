@@ -22,6 +22,17 @@ const Dashboard = (props) => {
     }, [refresh]);
     const handleRemoveTransaction = (id) => {
         setTransactions(transactions.filter(transaction => transaction.id !== id));
+        let removedTransaction = transactions.find(transaction => transaction.id === id);
+        let newBalance = {};
+
+        if(removedTransaction.type === 'expense'){
+            newBalance = { ...balance, expense: balance.expense - parseFloat(removedTransaction.amount) };
+        }else {
+            newBalance = { ...balance, budget: balance.budget - parseFloat(removedTransaction.amount) };
+
+        }
+        setBalance(newBalance);
+        localStorage.setItem('balance', JSON.stringify({ ...newBalance }));
         localStorage.setItem('transactions', JSON.stringify(transactions.filter(transaction => transaction.id !== id)));
     };
     const handleAddClick = () => {
