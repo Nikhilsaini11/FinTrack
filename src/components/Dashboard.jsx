@@ -7,6 +7,7 @@ const Dashboard = (props) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [amount, setAmount] = useState('');
     const [message, setMessage] = useState('');
+    const [error, setError] = useState('');
     const [isExpense, setIsExpense] = useState(true); // true for expense, false for budget
     const [balance, setBalance] = useState({ expense: 0.00, budget: 0.00 }); // true for expense, false for budget
 
@@ -36,6 +37,14 @@ const Dashboard = (props) => {
     };
     const handleAddClick = () => {
         // Logic to add the transaction goes here
+        if (!amount.trim()) {
+            setError('Amount is required.');
+            setTimeout(()=>{
+                setError('');
+
+            },3000)
+            return; // Stop processing if the input is empty
+        }
         let newTransaction = { id: Date.now(), type: isExpense ? 'expense' : 'budget', amount: parseFloat(amount), message: message };
         setTransactions([...transactions, newTransaction]);
         let newBalance = {};
@@ -62,9 +71,9 @@ const Dashboard = (props) => {
         }
     };
 
-    const formattedBalance = (amount) =>{
+    const formattedBalance = (amount) => {
 
-       const formattedBalance = new Intl.NumberFormat('en-IN', {
+        const formattedBalance = new Intl.NumberFormat('en-IN', {
             style: 'decimal',
         }).format(amount)
 
@@ -134,10 +143,11 @@ const Dashboard = (props) => {
                                     src="https://cdn.lordicon.com/zxvuvcnc.json"
                                     trigger="hover"
                                     colors="primary:#ff3366"
-                                    style={{width:'25px',height:'25px'}}>
+                                    style={{ width: '25px', height: '25px' }}>
                                 </lord-icon>
                             </button>
                             <h2 className="text-xl text-[#e0e0e0] mb-4">Add Transaction</h2>
+                            {error && <div style={{ color: 'red',marginBottom: '5px' }}>{error}</div>}
                             <label className="block text-[#e0e0e0] mb-2">Amount</label>
                             <input
                                 type="number"
