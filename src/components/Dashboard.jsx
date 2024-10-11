@@ -62,6 +62,15 @@ const Dashboard = (props) => {
         }
     };
 
+    const formattedBalance = (amount) =>{
+
+       const formattedBalance = new Intl.NumberFormat('en-IN', {
+            style: 'decimal',
+        }).format(amount)
+
+        return formattedBalance;
+    }
+
     return (
         <div id="dashboard" className="bg-gradient-to-r from-[#1e2024] to-[#23272b] text-[#e0e0e0] px-6 py-12 pt-20 min-h-screen">
             {/* Logo and Description Section */}
@@ -83,7 +92,7 @@ const Dashboard = (props) => {
             <div id='addExpense' className="flex w-full md:w-9/12 mx-auto flex-col items-center align-middle justify-center h-64 bg-[#1c1e22] rounded-lg shadow-lg p-4">
                 <div className="flex justify-between w-full mb-4">
                     {/* Balance on the Left */}
-                    <h2 className="text-2xl text-[#e0e0e0]">Balance: ₹{balance.budget - balance.expense}</h2>
+                    <h2 className="text-2xl text-[#e0e0e0]">Balance: ₹{formattedBalance(balance.budget - balance.expense)}</h2>
 
                     {/* Add Button on the Right */}
                     <button
@@ -105,11 +114,11 @@ const Dashboard = (props) => {
                 <div className="flex justify-between w-full">
                     <div className="bg-gradient-to-r from-red-700 to-red-500 rounded-lg p-4 flex-1 mr-2 shadow-lg">
                         <h3 className="text-lg text-white">Expenses</h3>
-                        <p className="text-[#e0e0e0]">₹{balance.expense}</p>
+                        <p className="text-[#e0e0e0]">₹{formattedBalance(balance.expense)}</p>
                     </div>
                     <div className="bg-gradient-to-r from-green-500 to-green-700 rounded-lg p-4 flex-1 ml-2 shadow-lg">
                         <h3 className="text-lg text-white">Budget</h3>
-                        <p className="text-[#e0e0e0]">₹{balance.budget}</p>
+                        <p className="text-[#e0e0e0]">₹{formattedBalance(balance.budget)}</p>
                     </div>
                 </div>
 
@@ -183,7 +192,7 @@ const Dashboard = (props) => {
                             className={`flex justify-between items-center p-2 mb-4 rounded-lg bg-[#1c1e22] border-l-4 border-r-4 ${transaction.type === 'expense' ? 'border-red-600' : 'border-green-600'}`}
                         >
                             <div>
-                                <span className="font-bold">{transaction.message}</span> - ₹{transaction.amount}
+                                <span className="font-bold">{transaction.message}</span> - ₹{formattedBalance(transaction.amount)}
                             </div>
                             <button
                                 className="text-red-600 hover:text-red-800"
