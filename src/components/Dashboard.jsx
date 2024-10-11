@@ -24,9 +24,9 @@ const Dashboard = (props) => {
         let removedTransaction = transactions.find(transaction => transaction.id === id);
         let newBalance = {};
 
-        if(removedTransaction.type === 'expense'){
+        if (removedTransaction.type === 'expense') {
             newBalance = { ...balance, expense: balance.expense - parseFloat(removedTransaction.amount) };
-        }else {
+        } else {
             newBalance = { ...balance, budget: balance.budget - parseFloat(removedTransaction.amount) };
 
         }
@@ -87,10 +87,16 @@ const Dashboard = (props) => {
 
                     {/* Add Button on the Right */}
                     <button
-                        className="bg-[#ff014f] text-white px-4 py-2 rounded hover:bg-[#ff3366] shadow-md shadow-[#000000]/30 transition-transform transform hover:scale-105"
+                        className="flex h-11 gap-1 bg-[#ff014f] text-white px-4 py-2 rounded hover:bg-[#ff3366] shadow-md shadow-[#000000]/30 transition-transform transform hover:scale-105"
                         onClick={() => setIsModalOpen(true)}
                     >
-                        Add
+                        <lord-icon
+                            src="https://cdn.lordicon.com/jgnvfzqg.json"
+                            trigger="hover"
+                            colors="primary:#ffffff"
+                            style={{ width: '25px', height: '25px' }}>
+                        </lord-icon>
+                        <span>Add</span>
                     </button>
 
                 </div>
@@ -115,7 +121,12 @@ const Dashboard = (props) => {
                                 className="absolute top-4 right-4 text-gray-400 hover:text-white"
                                 onClick={closeModal}
                             >
-                                ✖️
+                                <lord-icon
+                                    src="https://cdn.lordicon.com/zxvuvcnc.json"
+                                    trigger="hover"
+                                    colors="primary:#ff3366"
+                                    style={{width:'25px',height:'25px'}}>
+                                </lord-icon>
                             </button>
                             <h2 className="text-xl text-[#e0e0e0] mb-4">Add Transaction</h2>
                             <label className="block text-[#e0e0e0] mb-2">Amount</label>
@@ -178,7 +189,12 @@ const Dashboard = (props) => {
                                 className="text-red-600 hover:text-red-800"
                                 onClick={() => handleRemoveTransaction(transaction.id)}
                             >
-                                Remove
+                                <lord-icon
+                                    src="https://cdn.lordicon.com/skkahier.json"
+                                    trigger="hover"
+                                    colors="primary:#dc2626"
+                                    style={{ width: '25px', height: '25px' }}>
+                                </lord-icon>
                             </button>
                         </div>
                     ))}
