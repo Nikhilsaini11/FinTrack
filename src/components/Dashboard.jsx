@@ -18,7 +18,6 @@ const Dashboard = (props) => {
 
         setTransactions(storedTransactions);
         setBalance(storedBalance);
-        console.log("Local Storge Data fetched", storedTransactions, storedBalance);
     }, [refresh]);
     const handleRemoveTransaction = (id) => {
         setTransactions(transactions.filter(transaction => transaction.id !== id));
@@ -37,7 +36,6 @@ const Dashboard = (props) => {
     };
     const handleAddClick = () => {
         // Logic to add the transaction goes here
-        console.log(`Added: ${isExpense ? 'Expense' : 'Budget'} of $${amount} - ${message}`);
         let newTransaction = { id: Date.now(), type: isExpense ? 'expense' : 'budget', amount: parseFloat(amount), message: message };
         setTransactions([...transactions, newTransaction]);
         let newBalance = {};
@@ -47,7 +45,6 @@ const Dashboard = (props) => {
             newBalance = { ...balance, budget: balance.budget + parseFloat(amount) };
         }
         setBalance(newBalance);
-        console.log(transactions, balance);
         localStorage.setItem('transactions', JSON.stringify([...transactions, newTransaction]));
         localStorage.setItem('balance', JSON.stringify({ ...newBalance }));
         setAmount('');

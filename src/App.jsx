@@ -9,7 +9,6 @@ function App() {
   const handleClearData = () => {
       localStorage.clear();
       setRefresh(prev => !prev);
-      console.log(refresh); // Toggle refresh state to trigger re-render
     };
 
   const scrollToSection = (sectionId) => {
